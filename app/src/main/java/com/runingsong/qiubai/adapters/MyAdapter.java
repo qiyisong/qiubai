@@ -12,25 +12,25 @@ import java.util.List;
  * Created by Administrator on 15-12-28.
  */
 public class MyAdapter extends FragmentPagerAdapter{
-    private List<String> items;
-
-    public MyAdapter(FragmentManager fm, List<String> items) {
+    private List<Fragment> fragments;
+    private List<String> titles;
+    public MyAdapter(FragmentManager fm, List<Fragment> fragments,List<String> title) {
         super(fm);
-        this.items = items;
+        this.fragments = fragments;
+        this.titles = title;
     }
     @Override
     public Fragment getItem(int position) {
-        String s = items.get(position);
-        BlankFragment blankFragment = BlankFragment.newInstance(s);
-        return blankFragment;
+        Fragment fragment = fragments.get(position);
+        return fragment;
     }
     @Override
     public int getCount() {
-        return items.size();
+        return fragments.size();
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return items.get(position);
+        return titles.get(position);
     }
 }

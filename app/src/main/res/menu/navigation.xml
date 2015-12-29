@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:icon="@mipmap/review_pass"
+            android:icon="@mipmap/ic_qiushi_normal"
               android:id="@+id/item_1"
               android:title="糗事"
               android:checked="true" />
         <item
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_qiuyoucircle_normal"
             android:id="@+id/item_2"
-            android:title="视频"/>
+            android:title="糗友圈"/>
         <item
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_nearby_normal"
             android:id="@+id/item_3"
-            android:title="图片"/>
+            android:title="发现"/>
         <item
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@mipmap/ic_message_normal"
             android:id="@+id/item_4"
-            android:title="文字"
+            android:title="小纸条"
             />
     </group>
     <item android:title="设置">
