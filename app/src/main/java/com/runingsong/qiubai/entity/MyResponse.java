@@ -2,42 +2,105 @@ package com.runingsong.qiubai.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 15-12-29.
  */
-public class Response {
+public class MyResponse {
 
+    /**
+     * count : 30
+     * err : 0
+     * items : [{"format":"word","image":null,"published_at":1451374502,"tag":"","user":{"avatar_updated_at":1450601756,"last_visited_at":1378213948,"created_at":1378213948,"state":"active","email":"","last_device":"ios_2.6","role":"n","login":"凯歌改名大美丽","id":11065042,"icon":"20151220085556.jpg"},"image_size":null,"id":114467360,"votes":{"down":-281,"up":9812},"created_at":1451372620,"content":"我们这边结婚都要闹新娘，结婚当晚，我问老公，为什么今天结婚没人闹我？老公说，我提前给他们说好了，谁闹谁领走，谁领走。领走。。\n那一个都没闹的是几个意思。。。","state":"publish","comments_count":93,"allow_comment":true,"share_count":61,"type":"hot","pic_url":"http://qiubai-video.qiushibaike.com/DCZ6Y069QR96MDDI.jpg"}]
+     * total : 300
+     * page : 1
+     * refresh : 300
+     */
+
+    @SerializedName("count")
+    private int count;
+    @SerializedName("err")
+    private int err;
+    @SerializedName("total")
+    private int total;
+    @SerializedName("page")
+    private int page;
+    @SerializedName("refresh")
+    private int refresh;
     /**
      * format : word
      * image : null
-     * published_at : 1451346901
+     * published_at : 1451374502
      * tag :
-     * user : {"avatar_updated_at":1451392978,"last_visited_at":1327836426,"created_at":1327836426,"state":"active","email":" ","last_device":"ios_1.0","role":"n","login":"潇湘墨兰","id":441420,"icon":"20151229124258.jpg"}
+     * user : {"avatar_updated_at":1450601756,"last_visited_at":1378213948,"created_at":1378213948,"state":"active","email":"","last_device":"ios_2.6","role":"n","login":"凯歌改名大美丽","id":11065042,"icon":"20151220085556.jpg"}
      * image_size : null
-     * id : 114462277
-     * votes : {"down":-276,"up":11329}
-     * created_at : 1451344564
-     * content : 见学长夫妇，说是最近俩人一直分床睡，已经好几个月了。我还以为是关系冷淡期，关切地问怎么回事。学长含羞一笑，说俩人共同爱好太多，三观太和，永远有聊不完的话题，一不小心就唠到三四点，再愉快地啪啪一下，第二天根本没法起床上班...秀得我泪流满面…
+     * id : 114467360
+     * votes : {"down":-281,"up":9812}
+     * created_at : 1451372620
+     * content : 我们这边结婚都要闹新娘，结婚当晚，我问老公，为什么今天结婚没人闹我？老公说，我提前给他们说好了，谁闹谁领走，谁领走。领走。。
+     那一个都没闹的是几个意思。。。
      * state : publish
-     * comments_count : 103
+     * comments_count : 93
      * allow_comment : true
-     * share_count : 383
+     * share_count : 61
      * type : hot
+     * pic_url : http://qiubai-video.qiushibaike.com/DCZ6Y069QR96MDDI.jpg
      */
 
     @SerializedName("items")
     private List<ItemsEntity> items;
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setErr(int err) {
+        this.err = err;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public void setRefresh(int refresh) {
+        this.refresh = refresh;
+    }
+
     public void setItems(List<ItemsEntity> items) {
         this.items = items;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int getErr() {
+        return err;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public int getPage() {
+        return page;
+    }
+
+    public int getRefresh() {
+        return refresh;
     }
 
     public List<ItemsEntity> getItems() {
         return items;
     }
 
-    public static class ItemsEntity {
+    public static class ItemsEntity implements Serializable {
         @SerializedName("format")
         private String format;
         @SerializedName("image")
@@ -47,16 +110,16 @@ public class Response {
         @SerializedName("tag")
         private String tag;
         /**
-         * avatar_updated_at : 1451392978
-         * last_visited_at : 1327836426
-         * created_at : 1327836426
+         * avatar_updated_at : 1450601756
+         * last_visited_at : 1378213948
+         * created_at : 1378213948
          * state : active
          * email :
-         * last_device : ios_1.0
+         * last_device : ios_2.6
          * role : n
-         * login : 潇湘墨兰
-         * id : 441420
-         * icon : 20151229124258.jpg
+         * login : 凯歌改名大美丽
+         * id : 11065042
+         * icon : 20151220085556.jpg
          */
 
         @SerializedName("user")
@@ -66,8 +129,8 @@ public class Response {
         @SerializedName("id")
         private int id;
         /**
-         * down : -276
-         * up : 11329
+         * down : -281
+         * up : 9812
          */
 
         @SerializedName("votes")
@@ -86,6 +149,8 @@ public class Response {
         private int shareCount;
         @SerializedName("type")
         private String type;
+        @SerializedName("pic_url")
+        private String picUrl;
 
         public void setFormat(String format) {
             this.format = format;
@@ -145,6 +210,10 @@ public class Response {
 
         public void setType(String type) {
             this.type = type;
+        }
+
+        public void setPicUrl(String picUrl) {
+            this.picUrl = picUrl;
         }
 
         public String getFormat() {
@@ -207,7 +276,11 @@ public class Response {
             return type;
         }
 
-        public static class UserEntity {
+        public String getPicUrl() {
+            return picUrl;
+        }
+
+        public static class UserEntity implements Serializable {
             @SerializedName("avatar_updated_at")
             private int avatarUpdatedAt;
             @SerializedName("last_visited_at")
@@ -310,7 +383,7 @@ public class Response {
             }
         }
 
-        public static class VotesEntity {
+        public static class VotesEntity implements Serializable {
             @SerializedName("down")
             private int down;
             @SerializedName("up")

@@ -10,5 +10,7 @@ import retrofit.http.Query;
  */
 public interface QysService {
     @GET("article/list/{type}")
-    Call<Response> getList(@Path("type") String type,@Query("page") int page);
+    Call<MyResponse> getList(@Path("type") String type,@Query("page") int page);
+    @GET("article/{id}/comments")
+    Call<Comment> getListComment(@Path("id") String id,@Query("page") int page);
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:padding="16dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -106,20 +106,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-        <RadioButton
-            android:id="@+id/support"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:background="@drawable/up_select"
-            />
-        <RadioButton
-            android:id="@+id/down"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:background="@drawable/down"
-            />
+            <RadioButton
+                android:id="@+id/support"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:button="@null"
+                android:background="@drawable/up_select"
+                />
+            <RadioButton
+                android:id="@+id/down"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:button="@null"
+                android:background="@drawable/down"
+                />
         </RadioGroup>
         <ImageView
             android:id="@+id/comments"
@@ -128,4 +128,27 @@
             android:src="@mipmap/operation_comments"
             />
     </LinearLayout>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <RadioButton
+            android:id="@+id/all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全部"
+            android:textColor="@color/select_color"
+            android:button="@null"
+            />
+        <RadioButton
+            android:id="@+id/hot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="热门"
+            android:textColor="@color/select_color"
+            android:button="@null"
+            />
+    </RadioGroup>
 </LinearLayout>

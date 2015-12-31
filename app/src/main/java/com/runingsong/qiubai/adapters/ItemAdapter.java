@@ -1,6 +1,8 @@
 package com.runingsong.qiubai.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.runingsong.qiubai.R;
-import com.runingsong.qiubai.entity.Response;
+import com.runingsong.qiubai.entity.MyResponse;
 import com.runingsong.qiubai.tool.CircleTransformation;
 import com.squareup.picasso.Picasso;
 
@@ -25,11 +27,19 @@ import java.util.regex.Pattern;
  */
 public class ItemAdapter extends BaseAdapter {
     private Context context;
-    private List<Response.ItemsEntity> items;
+    private List<MyResponse.ItemsEntity> items;
+    private View.OnClickListener onClickListener;
+    private int parentWidth;
+
     public ItemAdapter(Context context) {
         this.context = context;
         items = new ArrayList<>();
     }
+
+    public void setOnClickListener(View.OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
+
     @Override
     public int getCount() {
         return items.size();
@@ -46,9 +56,12 @@ public class ItemAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         if(convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_layout,parent,false);
-            convertView.setTag(new ViewHolder(convertView));
+            ViewHolder holder = new ViewHolder(convertView);
+            holder.commentCount.setOnClickListener(onClickListener);
+            convertView.setTag(holder);
         }
-        Response.ItemsEntity itemsEntity = items.get(position);
+        parentWidth = parent.getWidth();
+        MyResponse.ItemsEntity itemsEntity = items.get(position);
         ViewHolder viewHolder = (ViewHolder)convertView.getTag();
         if(itemsEntity.getUser()!= null){
             String icon = itemsEntity.getUser().getIcon();
@@ -65,27 +78,40 @@ public class ItemAdapter extends BaseAdapter {
             viewHolder.icon.setImageResource(R.mipmap.nickname);
             viewHolder.name.setText("匿名用户");
         }
-        if(itemsEntity.getImage()==null){
-            viewHolder.image.setVisibility(View.GONE);
-        }else{
+        String format = itemsEntity.getFormat();
+        if("video".equals(format)){
             viewHolder.image.setVisibility(View.VISIBLE);
-            Picasso.with(context).load(getImageURL(itemsEntity.getImage().toString()))
-                    .resize(parent.getWidth(),0)
+            viewHolder.play.setVisibility(View.VISIBLE);
+            Picasso.with(context).load(itemsEntity.getPicUrl())
+                    .resize(parentWidth,0)
                     .into(viewHolder.image);
+            Log.d("qys", "getView() returned: " + itemsEntity.getPicUrl());
+        }else{
+            viewHolder.play.setVisibility(View.GONE);
+            if(itemsEntity.getImage()==null){
+                viewHolder.image.setVisibility(View.GONE);
+            }else{
+                viewHolder.image.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(getImageURL(itemsEntity.getImage().toString()))
+                        .resize(parent.getWidth(),0)
+                        .into(viewHolder.image);
+            }
         }
         int up = itemsEntity.getVotes().getUp();
-        viewHolder.goodCount.setText("好评  "+up);
+        viewHolder.goodCount.setText("好评  " + up);
         String content = itemsEntity.getContent();
         int commentsCount = itemsEntity.getCommentsCount();
         viewHolder.commentCount.setText("评论  " + commentsCount);
+        Bundle bundle = new Bundle();
+        bundle.putInt("position", position);
+        bundle.putInt("width",parentWidth);
+        viewHolder.commentCount.setTag(bundle);
         int shareCount = itemsEntity.getShareCount();
         viewHolder.shareCount.setText("分享  "+shareCount);
-
         viewHolder.content.setText(content);
-
         return convertView;
     }
-    public void newAddAll(Collection<? extends Response.ItemsEntity> collection){
+    public void newAddAll(Collection<? extends MyResponse.ItemsEntity> collection){
         items.addAll(collection);
         notifyDataSetChanged();
     }
@@ -110,6 +136,7 @@ public class ItemAdapter extends BaseAdapter {
         private TextView shareCount;
         private RadioButton support;
         private RadioButton down;
+        private ImageView play;
         public ViewHolder(View itemView){
             icon =(ImageView)itemView.findViewById(R.id.self_user_icon);
             name = (TextView)itemView.findViewById(R.id.self_user_name);
@@ -120,6 +147,7 @@ public class ItemAdapter extends BaseAdapter {
             shareCount = (TextView)itemView.findViewById(R.id.share);
             support = (RadioButton)itemView.findViewById(R.id.support);
             down = (RadioButton)itemView.findViewById(R.id.down);
+            play = (ImageView)itemView.findViewById(R.id.play);
         }
     }
 }

@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MyAdapter adapter = new MyAdapter(getSupportFragmentManager(),fragments,titles);
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
     }
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
